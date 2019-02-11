@@ -14,16 +14,18 @@ public class Promotions {
     public ItemsHalf getItemsHalf(Item[] items) {
         float sumPrice = 0;
         String type = "无";
-        for(int i=0; i<items.length;i++) {
-            if(items[i].getType().equals("half")) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i].getType().equals("half")) {
                 type = "指定菜品半价";
-                sumPrice += items[i].getAllPrice()/2;
+                sumPrice += items[i].getAllPrice() / 2;
             } else {
                 sumPrice += items[i].getAllPrice();
             }
         }
         float totalPrice = getTotalPrice(items);
-        return new ItemsHalf(type,sumPrice,totalPrice-sumPrice);
+        ItemsHalf half = new ItemsHalf(type, sumPrice, totalPrice - sumPrice);
+        half.setHalfItems(items);
+        return half;
     }
 
     private static float getTotalPrice(Item[] items) {
