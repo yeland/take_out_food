@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class ItemsHalf {
+public class ItemsPromotion {
     private String type;
     private float sumPrice;
     private float savePrice;
     private String halfItems;
 
-    public ItemsHalf(String type, float sumPrice, float savePrice) {
+    public ItemsPromotion(String type, float sumPrice, float savePrice) {
         this.type = type;
         this.sumPrice = sumPrice;
         this.savePrice = savePrice;

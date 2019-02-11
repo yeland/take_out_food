@@ -1,17 +1,17 @@
 public class Promotions {
-    public ItemsCut getItemsCut(Item[] items) {
+    public ItemsPromotion getItemsCut(Item[] items) {
         float totalPrice = getTotalPrice(items);
         float sumPrice;
         if (totalPrice > 30) {
             sumPrice = totalPrice - 6;
             float savePrice = 6;
-            return new ItemsCut(sumPrice, savePrice, "满30减6元");
+            return new ItemsPromotion("满30减6元",sumPrice, savePrice);
         } else {
-            return new ItemsCut(totalPrice, 0, "无");
+            return new ItemsPromotion("无",totalPrice, 0);
         }
     }
 
-    public ItemsHalf getItemsHalf(Item[] items) {
+    public ItemsPromotion getItemsHalf(Item[] items) {
         float sumPrice = 0;
         String type = "无";
         for (int i = 0; i < items.length; i++) {
@@ -23,7 +23,7 @@ public class Promotions {
             }
         }
         float totalPrice = getTotalPrice(items);
-        ItemsHalf half = new ItemsHalf(type, sumPrice, totalPrice - sumPrice);
+        ItemsPromotion half = new ItemsPromotion(type, sumPrice, totalPrice - sumPrice);
         half.setHalfItems(items);
         return half;
     }

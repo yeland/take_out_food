@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class BestCharge {
@@ -9,8 +8,8 @@ public class BestCharge {
         BestCharge best = new BestCharge();
         Item[] items = best.stringToItems(read);
         Promotions promotions = new Promotions();
-        ItemsCut cut = promotions.getItemsCut(items);
-        ItemsHalf half = promotions.getItemsHalf(items);
+        ItemsPromotion cut = promotions.getItemsCut(items);
+        ItemsPromotion half = promotions.getItemsHalf(items);
         System.out.println("输入数据：" + half.getHalfItems());
     }
 
@@ -25,28 +24,39 @@ public class BestCharge {
         return items;
     }
 
+    public String comparaPromotions(ItemsPromotion cut, ItemsPromotion half) {
+        if (cut.getSumPrice() < half.getSumPrice()) {
+            return generateHalfString(half);
+        } else {
+            return generateCutString(cut);
+        }
+    }
+
     public String generateItems(Item[] items) {
         String[] itemsString = new String[items.length];
-        for(int i=0; i<items.length;i++) {
+        for (int i = 0; i < items.length; i++) {
             itemsString[i] = items[i].getName() + " x " + items[i].getAmount() + " = " + items[i].getAllPrice();
         }
-        return String.join("\n",itemsString);
+        return String.join("\n", itemsString);
     }
 
-    public String generateCut(ItemsCut cut) {
-//        final String dot = "-----------------------------------\n";
+    public String generateCutString(ItemsPromotion cut) {
+        String cutString;
         if (cut.getType().equals("满30减6元")) {
-            return "使用优惠：\n" + cut.getType() + "，省" + cut.getSavePrice() + "元\n";
+            cutString = "使用优惠：\n" + cut.getType() + "，省" + cut.getSavePrice() + "元\n";
         } else {
-            return "";
+            cutString = "";
         }
+        return cutString + "-----------------------------------\n" + "总计：" + cut.getSumPrice() + "元";
     }
 
-    public String generateHalfString(ItemsHalf half) {
+    public String generateHalfString(ItemsPromotion half) {
+        String halfString;
         if (half.getType().equals("指定菜品半价")) {
-            return "使用优惠：\n" + half.getType() + half.getHalfItems() + "，省" + half.getSavePrice() + "元";
+            halfString = "使用优惠：\n" + half.getType() + half.getHalfItems() + "，省" + half.getSavePrice() + "元";
         } else {
-            return "";
+            halfString = "";
         }
+        return halfString + "-----------------------------------\n" + "总计：" + half.getSumPrice() + "元";
     }
 }
