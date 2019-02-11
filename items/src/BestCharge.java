@@ -2,15 +2,16 @@ import java.util.Scanner;
 
 public class BestCharge {
     public static void main(String[] args) {
-        System.out.print("请输入菜品名称和数量（格式：名称x数量，名称x数量，…）：");
-        Scanner scan = new Scanner(System.in);
-        String read = scan.nextLine();
         BestCharge best = new BestCharge();
-        Item[] items = best.stringToItems(read);
-        Promotions promotions = new Promotions();
-        ItemsPromotion cut = promotions.getItemsCut(items);
-        ItemsPromotion half = promotions.getItemsHalf(items);
-        best.printToString(items,cut,half);
+        Item[] items = best.stringToItems(best.getInput());
+        best.getBestCharge(items);
+    }
+
+    public String getInput() {
+        System.out.print("请输入菜品名称和数量（格式：名称x数量，名称x数量，…）：");
+        //示例输入：黄焖鸡x1，肉夹馍x2，凉皮x1（或：肉夹馍x4，凉皮x1;肉夹馍x4）
+        Scanner scan = new Scanner(System.in);
+        return scan.nextLine();
     }
 
     public Item[] stringToItems(String read) {
@@ -22,6 +23,13 @@ public class BestCharge {
             items[i] = new Item(name, amount);
         }
         return items;
+    }
+
+    public void getBestCharge(Item[] items) {
+        Promotions promotions = new Promotions();
+        ItemsPromotion cut = promotions.getItemsCut(items);
+        ItemsPromotion half = promotions.getItemsHalf(items);
+        printToString(items,cut,half);
     }
 
     public void printToString(Item[] items, ItemsPromotion cut, ItemsPromotion half) {
