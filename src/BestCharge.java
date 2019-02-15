@@ -1,3 +1,7 @@
+import model.Item;
+import model.ItemsPromotion;
+import service.Promotions;
+
 import java.util.Scanner;
 
 public class BestCharge {

@@ -1,3 +1,8 @@
+package service;
+
+import model.Item;
+import model.ItemsPromotion;
+
 public class Promotions {
     public ItemsPromotion getItemsCut(Item[] items) {
         float totalPrice = getTotalPrice(items);
