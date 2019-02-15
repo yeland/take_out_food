@@ -37,10 +37,10 @@ public class BestCharge {
     }
 
     public void printToString(Item[] items, ItemsPromotion cut, ItemsPromotion half) {
-        final String header = "============= 订餐明细 =============\n";
-        final String bottom = "===================================";
+        final String HEADER = "============= 订餐明细 =============\n";
+        final String BOTTOM = "===================================";
         String promotionString = comparePromotions(cut, half);
-        String output = header + generateItems(items) + "\n" + promotionString + bottom;
+        String output = HEADER + generateItems(items) + "\n" + promotionString + BOTTOM;
         System.out.println(output);
     }
 
@@ -62,9 +62,9 @@ public class BestCharge {
 
     public String generateCutString(ItemsPromotion cut) {
         String cutString;
-        final String dot = "-----------------------------------\n";
+        final String DOT = "-----------------------------------\n";
         if (cut.getType().equals("满30减6元")) {
-            cutString = dot + "使用优惠：\n" + cut.getType() + "，省" + cut.getSavePrice() + "元\n";
+            cutString = DOT + "使用优惠：\n" + cut.getType() + "，省" + cut.getSavePrice() + "元\n";
         } else {
             cutString = "";
         }
@@ -73,9 +73,9 @@ public class BestCharge {
 
     public String generateHalfString(ItemsPromotion half) {
         String halfString;
-        final String dot = "-----------------------------------\n";
+        final String DOT = "-----------------------------------\n";
         if (half.getType().equals("指定菜品半价")) {
-            halfString = dot + "使用优惠：\n" +
+            halfString = DOT + "使用优惠：\n" +
                     half.getType() + "(" + half.getHalfItems() + ")，省" + half.getSavePrice() + "元\n";
         } else {
             halfString = "";
