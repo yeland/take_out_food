@@ -2,6 +2,7 @@ import model.Item;
 import model.ItemsPromotion;
 import service.Promotions;
 import tools.Input;
+import tools.Print;
 
 
 public class BestCharge {
@@ -12,7 +13,6 @@ public class BestCharge {
         Item[] items = best.stringToItems(input.getInput());
         best.getBestCharge(items);
     }
-
 
     public Item[] stringToItems(String read) {
         String[] itemsString = read.split("，");
@@ -27,55 +27,9 @@ public class BestCharge {
 
     public void getBestCharge(Item[] items) {
         Promotions promotions = new Promotions();
-        ItemsPromotion cut = promotions.getItemsCut(items);
-        ItemsPromotion half = promotions.getItemsHalf(items);
-        printToString(items, cut, half);
+        ItemsPromotion finalPromotion = promotions.getFinalPromotion(items);
+        Print.printToString(items, finalPromotion);
     }
 
-    public void printToString(Item[] items, ItemsPromotion cut, ItemsPromotion half) {
-        final String HEADER = "============= 订餐明细 =============\n";
-        final String BOTTOM = "===================================";
-        String promotionString = comparePromotions(cut, half);
-        String output = HEADER + generateItems(items) + "\n" + promotionString + BOTTOM;
-        System.out.println(output);
-    }
 
-    public String comparePromotions(ItemsPromotion cut, ItemsPromotion half) {
-        if (cut.getSumPrice() > half.getSumPrice()) {
-            return generateHalfString(half);
-        } else {
-            return generateCutString(cut);
-        }
-    }
-
-    public String generateItems(Item[] items) {
-        String[] itemsString = new String[items.length];
-        for (int i = 0; i < items.length; i++) {
-            itemsString[i] = items[i].getName() + " x " + items[i].getAmount() + " = " + items[i].getAllPrice();
-        }
-        return String.join("\n", itemsString);
-    }
-
-    public String generateCutString(ItemsPromotion cut) {
-        String cutString;
-        final String DOT = "-----------------------------------\n";
-        if (cut.getType().equals("满30减6元")) {
-            cutString = DOT + "使用优惠：\n" + cut.getType() + "，省" + cut.getSavePrice() + "元\n";
-        } else {
-            cutString = "";
-        }
-        return cutString + "-----------------------------------\n" + "总计：" + cut.getSumPrice() + "元\n";
-    }
-
-    public String generateHalfString(ItemsPromotion half) {
-        String halfString;
-        final String DOT = "-----------------------------------\n";
-        if (half.getType().equals("指定菜品半价")) {
-            halfString = DOT + "使用优惠：\n" +
-                    half.getType() + "(" + half.getHalfItems() + ")，省" + half.getSavePrice() + "元\n";
-        } else {
-            halfString = "";
-        }
-        return halfString + "-----------------------------------\n" + "总计：" + half.getSumPrice() + "元\n";
-    }
 }

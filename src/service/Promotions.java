@@ -4,6 +4,15 @@ import model.Item;
 import model.ItemsPromotion;
 
 public class Promotions {
+    public ItemsPromotion getFinalPromotion(Item[] items) {
+        ItemsPromotion cut = getItemsCut(items);
+        ItemsPromotion half = getItemsHalf(items);
+        if (cut.getSumPrice() > half.getSumPrice()) {
+            return half;
+        }
+        return cut;
+    }
+
     public ItemsPromotion getItemsCut(Item[] items) {
         float totalPrice = getTotalPrice(items);
         float sumPrice;
