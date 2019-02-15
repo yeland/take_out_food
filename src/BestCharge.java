@@ -1,22 +1,18 @@
 import model.Item;
 import model.ItemsPromotion;
 import service.Promotions;
+import tools.Input;
 
-import java.util.Scanner;
 
 public class BestCharge {
     public static void main(String[] args) {
+        //示例输入：黄焖鸡x1，肉夹馍x2，凉皮x1（或：肉夹馍x4，凉皮x1;肉夹馍x4）
         BestCharge best = new BestCharge();
-        Item[] items = best.stringToItems(best.getInput());
+        Input input = new Input();
+        Item[] items = best.stringToItems(input.getInput());
         best.getBestCharge(items);
     }
 
-    public String getInput() {
-        System.out.print("请输入菜品名称和数量（格式：名称x数量，名称x数量，…）：");
-        //示例输入：黄焖鸡x1，肉夹馍x2，凉皮x1（或：肉夹馍x4，凉皮x1;肉夹馍x4）
-        Scanner scan = new Scanner(System.in);
-        return scan.nextLine();
-    }
 
     public Item[] stringToItems(String read) {
         String[] itemsString = read.split("，");
