@@ -29,13 +29,13 @@ public class BestCharge {
         Promotions promotions = new Promotions();
         ItemsPromotion cut = promotions.getItemsCut(items);
         ItemsPromotion half = promotions.getItemsHalf(items);
-        printToString(items,cut,half);
+        printToString(items, cut, half);
     }
 
     public void printToString(Item[] items, ItemsPromotion cut, ItemsPromotion half) {
         final String header = "============= 订餐明细 =============\n";
         final String bottom = "===================================";
-        String promotionString = comparePromotions(cut,half);
+        String promotionString = comparePromotions(cut, half);
         String output = header + generateItems(items) + "\n" + promotionString + bottom;
         System.out.println(output);
     }

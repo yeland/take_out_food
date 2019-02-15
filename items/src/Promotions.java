@@ -5,9 +5,9 @@ public class Promotions {
         if (totalPrice > 30) {
             sumPrice = totalPrice - 6;
             float savePrice = 6;
-            return new ItemsPromotion("满30减6元",sumPrice, savePrice);
+            return new ItemsPromotion("满30减6元", sumPrice, savePrice);
         } else {
-            return new ItemsPromotion("无",totalPrice, 0);
+            return new ItemsPromotion("无", totalPrice, 0);
         }
     }
 

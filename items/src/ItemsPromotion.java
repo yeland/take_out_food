@@ -35,6 +35,6 @@ public class ItemsPromotion {
                 findHalfItems.add(items[i].getName());
             }
         }
-        this.halfItems = String.join("，",findHalfItems);
+        this.halfItems = String.join("，", findHalfItems);
     }
 }
